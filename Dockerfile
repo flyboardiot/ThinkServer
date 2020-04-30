@@ -73,6 +73,7 @@ RUN pecl install rdkafka
 RUN echo extension=rdkafka.so > /etc/php/7.4/mods-available/rdkafka.ini
 RUN phpenmod rdkafka
 
+RUN sed -i ‘s/TLSv1.2/TLSv1.0/g’ /etc/ssl/openssl.cnf
 
 WORKDIR /app
 RUN chmod a+x /bin/start.sh /bin/install.sh
