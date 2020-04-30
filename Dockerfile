@@ -2,11 +2,17 @@ FROM ubuntu:20.04
 MAINTAINER Flyrainning "http://www.fengpiao.net"
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV ACCEPT_EULA Y
+
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
 
 RUN apt-get update -y \
   && apt-get install -y \
     iputils-ping \
     net-tools \
+    msodbcsql17 \
     unixodbc-dev \
     openssl \
     nginx \
@@ -48,6 +54,7 @@ RUN apt-get update -y \
 ADD etc /etc
 ADD app /app
 ADD bin /bin
+
 
 RUN pecl install sqlsrv
 RUN pecl install pdo_sqlsrv
