@@ -4,6 +4,13 @@ MAINTAINER Flyrainning "http://www.fengpiao.net"
 ENV DEBIAN_FRONTEND noninteractive
 ENV ACCEPT_EULA Y
 
+RUN apt-get update -y \
+  && apt-get install -y \
+    curl \
+    gnupg2 \
+    wget
+
+
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
