@@ -7,6 +7,7 @@ RUN apt-get update -y \
   && apt-get install -y \
     iputils-ping \
     net-tools \
+    unixodbc-dev \
     openssl \
     nginx \
     php-fpm \
