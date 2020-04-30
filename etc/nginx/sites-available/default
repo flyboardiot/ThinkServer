@@ -1,0 +1,55 @@
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+# Default server configuration
+#
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+
+
+	root /app/wwwroot/public;
+
+	index index.php index.html index.htm;
+
+	server_name _;
+
+	location / {
+		if (!-e $request_filename) {
+			rewrite  ^(.*)$  /index.php?s=/$1  last;
+		}
+		
+	}
+
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/run/php/php-fpm.sock;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+
+	location ~ /\. {
+		deny all;
+	}
+	location ~* /(?:uploads|files|images)/.*\.php$ {
+		deny all;
+	}
+	location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+		expires 96h;
+		log_not_found off;
+	}
+}
