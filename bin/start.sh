@@ -26,6 +26,6 @@ fi
 
 
 
-/usr/sbin/php-fpm7.4 --nodaemonize -c /etc/php/7.4/fpm/php.ini --fpm-config /etc/php/7.4/fpm/php-fpm.conf &
+/usr/sbin/php-fpm7.4 -R --nodaemonize -c /etc/php/7.4/fpm/php.ini --fpm-config /etc/php/7.4/fpm/php-fpm.conf &
 
 /usr/sbin/nginx -g 'daemon off; master_process on;'
