@@ -24,7 +24,10 @@ mkdir /app/wwwroot
 echo "<?php phpinfo(); ?>" > /app/wwwroot/index.php
 fi
 
-
+if [ -f "/app/wwwroot/init.sh" ]; then
+chmod a+x /app/wwwroot/init.sh
+/app/wwwroot/init.sh
+fi
 
 /usr/sbin/php-fpm7.4 -R --nodaemonize -c /etc/php/7.4/fpm/php.ini --fpm-config /etc/php/7.4/fpm/php-fpm.conf &
 
