@@ -24,6 +24,11 @@ mkdir /app/wwwroot
 echo "<?php phpinfo(); ?>" > /app/wwwroot/index.php
 fi
 
+if [ -f "/app/init.sh" ]; then
+chmod a+x /app/init.sh
+/app/init.sh
+fi
+
 if [ -f "/app/wwwroot/init.sh" ]; then
 chmod a+x /app/wwwroot/init.sh
 /app/wwwroot/init.sh
