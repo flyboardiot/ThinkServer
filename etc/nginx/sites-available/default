@@ -29,7 +29,7 @@ server {
 		if (!-e $request_filename) {
 			rewrite  ^(.*)$  /index.php?s=/$1  last;
 		}
-		
+
 	}
 
 
@@ -45,7 +45,7 @@ server {
 	location ~ /\. {
 		deny all;
 	}
-	location ~* /(?:uploads|files|images)/.*\.php$ {
+	location ~* /(?:uploads|files|data|images)/.*\.php$ {
 		deny all;
 	}
 	location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
