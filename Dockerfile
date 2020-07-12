@@ -54,6 +54,7 @@ RUN apt-get update -y \
     php-pear \
     php-dev \
     librdkafka-dev \
+    libmosquitto-dev \
   && apt-get autoclean \
   && apt-get autoremove \
   && rm -rf /var/lib/apt/lists/*
@@ -72,6 +73,10 @@ RUN phpenmod sqlsrv pdo_sqlsrv
 RUN pecl install rdkafka
 RUN echo extension=rdkafka.so > /etc/php/7.4/mods-available/rdkafka.ini
 RUN phpenmod rdkafka
+
+RUN pecl install Mosquitto-alpha
+RUN printf "; priority=40\nextension=mosquitto.so\n" > /etc/php/7.4/mods-available/mosquitto.ini
+RUN phpenmod mosquitto
 
 RUN sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 
