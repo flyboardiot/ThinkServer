@@ -78,6 +78,10 @@ RUN pecl install Mosquitto-alpha
 RUN printf "; priority=40\nextension=mosquitto.so\n" > /etc/php/7.4/mods-available/mosquitto.ini
 RUN phpenmod mosquitto
 
+RUN pecl install swoole
+RUN printf "; priority=40\nextension=swoole.so\n" > /etc/php/7.4/mods-available/swoole.ini
+RUN phpenmod swoole
+
 RUN sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 
 WORKDIR /app
